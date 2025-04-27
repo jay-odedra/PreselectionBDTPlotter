@@ -73,6 +73,7 @@ def plot_roc_curve(signal_scores, background_scores):
 
     #plt.scale('log')
     plt.xlim([0.0, 1.0])
+    plt.grid(True)
     plt.ylim([0.98, 1.01])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
@@ -97,8 +98,6 @@ if __name__ == "__main__":
        
     cutset_data = 'BToKEE_fit_mass>0.&&BToKEE_mll_fullfit<2.45&&BToKEE_mll_fullfit>1.05' #(BToKEE_fit_mass> 5.5 && BToKEE_fit_mass < 5.7) | (BToKEE_fit_mass < 5.0 && BToKEE_fit_mass > 4.7)' 
     signal_scores = load_scores_from_root(signal_file, tree_name, branch_name,cutset_mc)
-    print(f'Number of entries in signal: {len(signal_scores)}')
     background_scores = load_scores_from_root(background_file, tree_name, branch_name,cutset_data)
-    print(f'Number of entries in background: {len(background_scores)}')
     roc_auc = plot_roc_curve(signal_scores, background_scores)
     print(f'AUC: {roc_auc:.4f}')
